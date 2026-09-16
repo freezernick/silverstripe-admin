@@ -1377,7 +1377,19 @@ const localFormat = 'L LT';
 const dateOnlyLocalFormat = 'L';
 const hasNativeSupport = props => props.modernizr.inputtypes['datetime-local'];
 const asHTML5 = props => (0, _DateField.asHTML5)(props, hasNativeSupport);
-const triggerChange = (props, event, value) => {};
+const triggerChange = (props, event, value) => {
+  if (/^\d{4}-\d\d-\d\dT\d\d:\d\d$/.test(value)) {
+    props.onChange(event, {
+      id: props.id,
+      value: `${value}:00`
+    });
+  } else {
+    props.onChange(event, {
+      id: props.id,
+      value
+    });
+  }
+};
 const convertToLocalised = (props, isoTime) => {
   _moment.default.locale(props.lang);
   let localTime = '';
@@ -1395,8 +1407,11 @@ const convertToIso = (props, localTime) => {
   if (localTime) {
     const formats = [localFormat, dateOnlyLocalFormat, _moment.default.ISO_8601];
     const timeObject = (0, _DateField.moment)(props, hasNativeSupport, localTime, formats);
-    isoTime = timeObject.format('YYYY-MM-DDTHH:mm:ss');
+    if (timeObject.isValid()) {
+      isoTime = timeObject.format('YYYY-MM-DDTHH:mm:ss');
+    }
   }
+  console.log(isoTime);
   return isoTime;
 };
 const getLocalisedValue = props => (0, _DateField.getLocalisedValue)(props, convertToLocalised);
