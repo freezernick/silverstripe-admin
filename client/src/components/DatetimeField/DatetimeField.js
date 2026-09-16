@@ -52,6 +52,7 @@ const convertToIso = (props, localTime) => {
       isoTime = timeObject.format('YYYY-MM-DDTHH:mm:ss');
     }
   }
+  console.log(isoTime);
   return isoTime;
 };
 
