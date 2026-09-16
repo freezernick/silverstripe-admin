@@ -19,14 +19,14 @@ const hasNativeSupport = (props) => props.modernizr.inputtypes['datetime-local']
 const asHTML5 = (props) => asHTML5DateField(props, hasNativeSupport);
 
 const triggerChange = (props, event, value) => {
-  // html5 `datetime-local` input doesn't retain second digits if they're
-  // `00` but that will fail the back-end validation. So add `:00` to the
-  // value if they're missing.
-  if (/^\d{4}-\d\d-\d\dT\d\d:\d\d$/.test(value)) {
-    props.onChange(event, { id: props.id, value: `${value}:00` });
-  } else {
-    props.onChange(event, { id: props.id, value });
-  }
+  // // html5 `datetime-local` input doesn't retain second digits if they're
+  // // `00` but that will fail the back-end validation. So add `:00` to the
+  // // value if they're missing.
+  // if (/^\d{4}-\d\d-\d\dT\d\d:\d\d$/.test(value)) {
+  //   props.onChange(event, { id: props.id, value: `${value}:00` });
+  // } else {
+  //   props.onChange(event, { id: props.id, value });
+  // }
 };
 
 const convertToLocalised = (props, isoTime) => {
