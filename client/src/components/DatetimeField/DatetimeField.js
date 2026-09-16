@@ -48,11 +48,11 @@ const convertToIso = (props, localTime) => {
     // Input value can be in local format 'L', 'L LT' or ISO format
     const formats = [localFormat, dateOnlyLocalFormat, moment.ISO_8601];
     const timeObject = momentDateField(props, hasNativeSupport, localTime, formats);
-    if (timeObject.isValid()) {
+    // if (timeObject.isValid()) {
       isoTime = timeObject.format('YYYY-MM-DDTHH:mm:ss');
-    }
+    // }
   }
-  console.log(isoTime);
+  // console.log(isoTime);
   return isoTime;
 };
 
